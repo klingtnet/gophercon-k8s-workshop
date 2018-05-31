@@ -1,9 +1,10 @@
 package webserver
 
 import (
-	"context"
 	"net"
 	"net/http"
+
+	"github.com/facebookgo/grace/gracehttp"
 )
 
 type WebServer struct {
@@ -20,9 +21,5 @@ func New(host, port string, h http.Handler) *WebServer {
 }
 
 func (s *WebServer) Start() error {
-	return s.ListenAndServe()
-}
-
-func (s *WebServer) Stop() error {
-	return s.Shutdown(context.Background())
+	return gracehttp.Serve(&s.Server)
 }

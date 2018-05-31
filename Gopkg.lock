@@ -2,6 +2,30 @@
 
 
 [[projects]]
+  branch = "master"
+  name = "github.com/facebookgo/clock"
+  packages = ["."]
+  revision = "600d898af40aa09a7a93ecb9265d87b0504b6f03"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/facebookgo/grace"
+  packages = ["gracehttp","gracenet"]
+  revision = "4afe952a37a495ae4ac0c1d4ce5f66e91058d149"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/facebookgo/httpdown"
+  packages = ["."]
+  revision = "a3b1354551a26449fbe05f5d855937f6e7acbd71"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/facebookgo/stats"
+  packages = ["."]
+  revision = "1b76add642e42c6ffba7211ad7b3939ce654526e"
+
+[[projects]]
   name = "github.com/gorilla/context"
   packages = ["."]
   revision = "08b5f424b9271eedf6f9f0ce86cb9396ed337a42"
@@ -16,6 +40,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "710acbeff1e035c63e93b534fee8114af6b54616b1b0f926f0da85a0fceea502"
+  inputs-digest = "3bda00765b0308b56ccbac436f0dc584114803b7982d6cbd9ae91556a2000196"
   solver-name = "gps-cdcl"
   solver-version = 1

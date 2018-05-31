@@ -3,8 +3,7 @@ package main
 import (
 	"log"
 	"os"
-	"os/signal"
-	"syscall"
+	"sync"
 
 	"github.com/rumyantseva/gophercon/pkg/routing"
 	"github.com/rumyantseva/gophercon/pkg/webserver"
@@ -19,8 +18,6 @@ func main() {
 		version.Release, version.Commit, version.BuildTime,
 	)
 
-	shutdown := make(chan error, 2)
-
 	// you can also use github.com/kelseyhightower/envconfig
 	// to keep your config more structured
 	port := os.Getenv("PORT")
@@ -30,9 +27,13 @@ func main() {
 
 	r := routing.BaseRouter()
 	ws := webserver.New("", port, r)
+
+	w := sync.WaitGroup{}
+	w.Add(1)
 	go func() {
-		err := ws.Start()
-		shutdown <- err
+		ws.Start()
+		w.Done()
+		log.Printf("Gracefully shutting down web server...")
 	}()
 
 	internalPort := os.Getenv("INTERNAL_PORT")
@@ -43,31 +44,9 @@ func main() {
 	diagnosticsServer := webserver.New(
 		"", internalPort, diagnosticsRouter,
 	)
-	go func() {
-		err := diagnosticsServer.Start()
-		shutdown <- err
-	}()
 
-	interrupt := make(chan os.Signal, 1)
-	signal.Notify(interrupt, os.Interrupt, syscall.SIGTERM)
-
-	select {
-	case killSignal := <-interrupt:
-		log.Printf("Got %s. Stopping...", killSignal)
-	case err := <-shutdown:
-		log.Printf("Got an error '%s'. Stopping...", err)
-	}
-
-	err := ws.Stop()
-	if err != nil {
-		log.Print(err)
-	}
-
-	err = diagnosticsServer.Stop()
-	if err != nil {
-		log.Print(err)
-	}
-
-	// stop extra tasks ...
-	log.Print("Service was stoped.")
+	w.Add(1)
+	diagnosticsServer.Start()
+	w.Done()
+	log.Printf("Gracefully shutting down diagnostics server...")
 }
