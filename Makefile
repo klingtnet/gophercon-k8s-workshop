@@ -1,4 +1,4 @@
-PROJECT?=github.com/klingtnet/gophercon
+PROJECT?=github.com/klingtnet/gophercon-k8s-workshop
 APP?=gophercon
 PORT?=8000
 INTERNAL_PORT?=3001

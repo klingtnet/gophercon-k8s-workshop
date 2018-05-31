@@ -5,9 +5,9 @@ import (
 	"os"
 	"sync"
 
-	"github.com/klingtnet/gophercon/pkg/routing"
-	"github.com/klingtnet/gophercon/pkg/webserver"
-	"github.com/klingtnet/gophercon/version"
+	"github.com/klingtnet/gophercon-k8s-workshop/pkg/routing"
+	"github.com/klingtnet/gophercon-k8s-workshop/pkg/webserver"
+	"github.com/klingtnet/gophercon-k8s-workshop/version"
 )
 
 // go run ./cmd/gophercon/gophercon.go
