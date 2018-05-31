@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/rumyantseva/gophercon/pkg/routing"
+	"github.com/klingtnet/gophercon/pkg/routing"
 )
 
 func TestBaseRouter(t *testing.T) {
