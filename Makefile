@@ -1,4 +1,4 @@
-PROJECT?=github.com/rumyantseva/gophercon
+PROJECT?=github.com/klingtnet/gophercon
 APP?=gophercon
 PORT?=8000
 INTERNAL_PORT?=3001
